@@ -14,8 +14,10 @@
     <color name="dark_blue">#2D34A8</color>
     <color name="light_green">#62b565</color>
     <color name="dark_green">#006304</color>
-    <color name="light_orange">#f7bd77</color>
-    <color name="dark_orange">#bd6700</color>
-    <color name="dark_red">#b5181a</color>
-    <color name="light_red">#ffabac</color>
+    <color name="light_orange">#F7BD77</color>
+    <color name="dark_orange">#BD6700</color>
+    <color name="normal_red">#E81013</color>
+    <color name="dark_red">#B5181A</color>
+    <color name="light_red">#FFABAC</color>
+    <color name="normal_purple">#6B10EB</color>
 </resources>
