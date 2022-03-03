@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Timer</string>
+
+    <string name="check_numbers">Houve algum problema. Verifique os números inseridos.</string>
+</resources>

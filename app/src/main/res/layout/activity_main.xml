@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/count_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/edt_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_edt"
+            android:digits="0123456789"
+            android:ems="2"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="2"
+            android:text="00"
+            android:textSize="110sp"
+            android:textStyle="bold|normal" />
+
+        <EditText
+            android:id="@+id/edt_sec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_edt"
+            android:digits="0123456789"
+            android:ems="2"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="2"
+            android:text="00"
+            android:textSize="140sp"
+            android:textStyle="bold|normal" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_play"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
+        android:background="@drawable/custom_btn_play"
+        android:contentDescription="play_image"
+        android:src="@drawable/ic_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/count_layout" />
+
+    <ImageView
+        android:id="@+id/img_pause"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
+        android:background="@drawable/custom_btn_pause"
+        android:contentDescription="pause_image"
+        android:src="@drawable/ic_pause"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/count_layout" />
+
+    <ImageView
+        android:id="@+id/img_stop"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:contentDescription="stop_image"
+        android:src="@drawable/ic_stop"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/img_play"
+        app:layout_constraintEnd_toStartOf="@id/img_play"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/img_play" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
