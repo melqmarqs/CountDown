@@ -16,7 +16,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="make with ❤️ by Melq"
+        android:text="made with ❤️ by Melq"
         android:textAllCaps="true"
         android:textSize="15sp"
         android:textStyle="bold" />
