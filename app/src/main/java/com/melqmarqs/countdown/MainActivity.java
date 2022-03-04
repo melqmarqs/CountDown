@@ -189,8 +189,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateColor(long time, long parcialTime) {
-        float fraction = (float)parcialTime / (float)time;
-        int color = (int) new ArgbEvaluator().evaluate(fraction, ContextCompat.getColor(this, R.color.normal_red), ContextCompat.getColor(this, R.color.normal_purple));
+        float fraction = (float)(time - parcialTime) / (float)time;
+        int color = (int) new ArgbEvaluator().evaluate(fraction, ContextCompat.getColor(this, R.color.normal_purple), ContextCompat.getColor(this, R.color.normal_red));
         edtSec.setTextColor(color);
     }
 }
