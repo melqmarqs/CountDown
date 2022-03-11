@@ -25,7 +25,8 @@
             android:layout_gravity="center"
             android:background="@drawable/custom_edt"
             android:digits="0123456789"
-            android:ems="2"
+            android:ems="1"
+            android:fontFamily="@font/misskindergarten"
             android:gravity="center"
             android:inputType="number"
             android:maxLength="2"
@@ -40,7 +41,8 @@
             android:layout_gravity="center"
             android:background="@drawable/custom_edt"
             android:digits="0123456789"
-            android:ems="2"
+            android:ems="1"
+            android:fontFamily="@font/misskindergarten"
             android:gravity="center"
             android:inputType="number"
             android:maxLength="2"
@@ -50,6 +52,45 @@
 
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/imgbtn_play"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
+        android:src="@drawable/ic_play"
+        android:scaleType="fitCenter"
+        android:background="@drawable/custom_btn_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/count_layout"/>
+
+    <ImageButton
+        android:id="@+id/imgbtn_pause"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
+        android:background="@drawable/custom_btn_pause"
+        android:src="@drawable/ic_pause"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/count_layout" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_stop"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/ic_stop"
+        android:scaleType="fitCenter"
+        android:padding="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/imgbtn_play"
+        app:layout_constraintEnd_toStartOf="@id/imgbtn_play"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imgbtn_play"/>
+
+    <!--
     <ImageView
         android:id="@+id/img_play"
         android:layout_width="140dp"
@@ -86,5 +127,5 @@
         app:layout_constraintEnd_toStartOf="@id/img_play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/img_play" />
-
+    -->
 </androidx.constraintlayout.widget.ConstraintLayout>

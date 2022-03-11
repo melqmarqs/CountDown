@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView imgPlay, imgPause, imgStop;
+    private ImageButton imgbtnPlay, imgbtnPause, imgbtnStop;
     private EditText edtSec, edtMin;
     private View mainView;
     private CountDownTimer cdt;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
         //endregion
 
-        imgPlay.setOnClickListener(new View.OnClickListener() {
+        imgbtnPlay.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
@@ -119,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
                             auxMilli = 0; //setting 0 value to refresh auxSec and auxMin
 
-                            imgPlay.setVisibility(View.VISIBLE);
-                            imgPause.setVisibility(View.INVISIBLE);
-                            imgStop.setVisibility(View.INVISIBLE);
+                            imgbtnPlay.setVisibility(View.VISIBLE);
+                            imgbtnPause.setVisibility(View.INVISIBLE);
+                            imgbtnStop.setVisibility(View.INVISIBLE);
 
                             edtMin.setEnabled(true);
                             edtSec.setEnabled(true);
@@ -137,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
 
                     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-                    imgPlay.setVisibility(View.INVISIBLE);
-                    imgPause.setVisibility(View.VISIBLE);
-                    imgStop.setVisibility(View.VISIBLE);
+                    imgbtnPlay.setVisibility(View.INVISIBLE);
+                    imgbtnPause.setVisibility(View.VISIBLE);
+                    imgbtnStop.setVisibility(View.VISIBLE);
 
                     edtMin.setEnabled(false); //disabling edittext
                     edtSec.setEnabled(false);
@@ -153,17 +154,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        imgPause.setOnClickListener(new View.OnClickListener() {
+        imgbtnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cdt.cancel(); //pause count down
-                imgPlay.setVisibility(View.VISIBLE);
-                imgPause.setVisibility(View.INVISIBLE);
-                imgStop.setVisibility(View.VISIBLE);
+                imgbtnPlay.setVisibility(View.VISIBLE);
+                imgbtnPause.setVisibility(View.INVISIBLE);
+                imgbtnStop.setVisibility(View.VISIBLE);
             }
         });
 
-        imgStop.setOnClickListener(new View.OnClickListener() {
+        imgbtnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cdt.cancel(); //pause count down
@@ -174,9 +175,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeElements() {
         mainView = findViewById(R.id.main_layout);
-        imgPlay = findViewById(R.id.img_play);
-        imgPause = findViewById(R.id.img_pause);
-        imgStop = findViewById(R.id.img_stop);
+        imgbtnPlay = findViewById(R.id.imgbtn_play);
+        imgbtnPause = findViewById(R.id.imgbtn_pause);
+        imgbtnStop = findViewById(R.id.imgbtn_stop);
         edtMin = findViewById(R.id.edt_min);
         edtSec = findViewById(R.id.edt_sec);
     }
