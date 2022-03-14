@@ -24,14 +24,14 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnFocusChangeListener {
 
     private ImageButton imgbtnPlay, imgbtnPause, imgbtnStop;
     private EditText edtSec, edtMin, edtRest, edtRound;
     private View mainView;
     private CountDownTimer cdt;
     private long auxMilli = 0;
-    private int auxMin = 0, auxSec = 0, auxRest = 0;
+    private int auxMin = 0, auxSec = 0, auxRest = 0, roundsLeft = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,46 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
         initializeElements();
         changeEditTextToDefaultColor(0, 0);
+        edtSec.setOnFocusChangeListener(this);
+        edtMin.setOnFocusChangeListener(this);
+        edtRest.setOnFocusChangeListener(this);
+        edtRound.setOnFocusChangeListener(this);
 
         mainView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainView.clearFocus();
-                try {
-                    int auxMin = Integer.parseInt(edtMin.getText().toString());
-                    if (auxMin == 0)
-                        edtMin.setText("00");
-                } catch (Exception e) {
-                    edtMin.setText("00");
-                }
-
-                try {
-                    int auxSec = Integer.parseInt(edtSec.getText().toString());
-                    if (auxSec == 0)
-                        edtSec.setText("00");
-                } catch (Exception e) {
-                    edtSec.setText("00");
-                }
-
-                try {
-                    int auxRest = Integer.parseInt(edtRest.getText().toString());
-                    if (auxRest == 0)
-                        edtRest.setText("00");
-                } catch (Exception e) {
-                    edtRest.setText("00");
-                }
-
-                try {
-                    int auxRound = Integer.parseInt(edtRound.getText().toString());
-                    if (auxRound == 0)
-                        edtRound.setText("00");
-                } catch (Exception e) {
-                    edtRound.setText("00");
-                }
-
-                //Hidding/Closing soft keyboard
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mainView.getWindowToken(), 0);
+                view.clearFocus();
+                hideSoftKeyboard();
             }
         });
 
@@ -222,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void decreaseRoundsLeft() {
-        int roundsLeft = Integer.parseInt(edtRound.getText().toString());
+        roundsLeft = Integer.parseInt(edtRound.getText().toString());
         if (roundsLeft > 0) {
             edtRound.setText(String.format("%02d", --roundsLeft));
         }
@@ -241,10 +211,30 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    imgbtnPlay.performClick();
                     edtRest.setText(String.format("%02d", auxRest));
+
+                    if (roundsLeft > 0)
+                        imgbtnPlay.performClick();
                 }
             }.start();
         }
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean isFocused) {
+        EditText auxEditText = (EditText) view;
+        try {
+            if (!isFocused) {
+                int number = Integer.parseInt(auxEditText.getText().toString());
+                auxEditText.setText(String.format("%02d", number));
+            }
+        } catch (Exception e) {
+            auxEditText.setText(String.format("%02d", 0));
+        }
+    }
+
+    private void hideSoftKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mainView.getWindowToken(), 0);
     }
 }
