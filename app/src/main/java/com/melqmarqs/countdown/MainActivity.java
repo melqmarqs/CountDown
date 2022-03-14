@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private View mainView;
     private CountDownTimer cdt;
     private long auxMilli = 0;
-    private int auxMin = 0, auxSec = 0;
+    private int auxMin = 0, auxSec = 0, auxRest = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,22 @@ public class MainActivity extends AppCompatActivity {
                     edtSec.setText("00");
                 }
 
+                try {
+                    int auxRest = Integer.parseInt(edtRest.getText().toString());
+                    if (auxRest == 0)
+                        edtRest.setText("00");
+                } catch (Exception e) {
+                    edtRest.setText("00");
+                }
+
+                try {
+                    int auxRound = Integer.parseInt(edtRound.getText().toString());
+                    if (auxRound == 0)
+                        edtRound.setText("00");
+                } catch (Exception e) {
+                    edtRound.setText("00");
+                }
+
                 //Hidding/Closing soft keyboard
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(mainView.getWindowToken(), 0);
@@ -79,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 return edtMin.getText().length() == 0 && (i >= 13 && i <= 16);
+            }
+        });
+
+        edtRest.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                return edtRest.getText().length() == 0 && (i >= 13 && i <= 16);
             }
         });
         //endregion
@@ -114,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
                             changeEditTextToDefaultColor(auxMin, auxSec);
+                            decreaseRoundsLeft();
+                            restCount();
 
                             auxMilli = 0; //setting 0 value to refresh auxSec and auxMin
 
@@ -177,6 +202,8 @@ public class MainActivity extends AppCompatActivity {
         imgbtnStop = findViewById(R.id.imgbtn_stop);
         edtMin = findViewById(R.id.edt_min);
         edtSec = findViewById(R.id.edt_sec);
+        edtRest = findViewById(R.id.edt_rest);
+        edtRound = findViewById(R.id.edt_round);
     }
 
     private void changeEditTextToDefaultColor(int min, int sec) {
@@ -188,7 +215,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateColor(long time, long parcialTime) {
         float fraction = (float)(time - parcialTime) / (float)time;
-        int color = (int) new ArgbEvaluator().evaluate(fraction, ContextCompat.getColor(this, R.color.normal_purple), ContextCompat.getColor(this, R.color.normal_red));
+        int color = (int) new ArgbEvaluator().evaluate(fraction,
+                ContextCompat.getColor(this, R.color.normal_purple),
+                ContextCompat.getColor(this, R.color.normal_red));
         edtSec.setTextColor(color);
+    }
+
+    private void decreaseRoundsLeft() {
+        int roundsLeft = Integer.parseInt(edtRound.getText().toString());
+        if (roundsLeft > 0) {
+            edtRound.setText(String.format("%02d", --roundsLeft));
+        }
+    }
+
+    private void restCount() {
+        int rest = Integer.parseInt(edtRest.getText().toString());
+        if (rest > 0) {
+            auxRest = rest > auxRest ? rest : auxRest;
+            CountDownTimer restCountDown = new CountDownTimer((auxRest * 1_000) + 1_000, 1_000) {
+                @Override
+                public void onTick(long l) {
+                    int restLeft = (int) (l / 1_000) % 60;
+                    edtRest.setText(String.format("%02d", restLeft));
+                }
+
+                @Override
+                public void onFinish() {
+                    imgbtnPlay.performClick();
+                    edtRest.setText(String.format("%02d", auxRest));
+                }
+            }.start();
+        }
     }
 }
