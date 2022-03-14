@@ -3,4 +3,5 @@
     <string name="app_name">Timer</string>
 
     <string name="check_numbers">Check the numbers</string>
+    <string name="sorry_iamnotokay">Sorry, I am not okay :(</string>
 </resources>

@@ -27,7 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton imgbtnPlay, imgbtnPause, imgbtnStop;
-    private EditText edtSec, edtMin;
+    private EditText edtSec, edtMin, edtRest, edtRound;
     private View mainView;
     private CountDownTimer cdt;
     private long auxMilli = 0;
@@ -99,15 +99,12 @@ public class MainActivity extends AppCompatActivity {
                     cdt = new CountDownTimer(auxMilli < 1_000 ? timeInMilli : auxMilli, 1_000) {
                         @Override
                         public void onTick(long l) {
+                            int min = (int) (l / 1_000) / 60;
+                            int sec = (int) (l / 1_000) % 60;
                             auxMilli = l; //store the time in milliseconds to reuse later
-                            int min = Integer.parseInt(String.valueOf(l / 60_000));
-                            edtMin.setText(min < 10 ? "0" + min : String.valueOf(min));
 
-                            int sec = (int) ((l - (min * 60_000)) / 1_000);
-                            edtSec.setText(sec < 10 ? "0" + sec : String.valueOf(sec));
-
-                            //if (min == 0 && sec <= 10)
-                                //edtSec.setTextColor(Color.rgb(232, 39, 42));
+                            edtMin.setText(String.format("%02d", min));
+                            edtSec.setText(String.format("%02d", sec));
 
                             updateColor(timeInMilli, l);
                         }
@@ -146,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
                     edtSec.setEnabled(false);
 
                 } catch (Exception e) {
-                    Snackbar.make(mainView, R.string.check_numbers, Snackbar.LENGTH_LONG)
-                            .setTextColor(Color.rgb(255, 255, 255))
-                            .setBackgroundTint(Color.rgb(181, 24, 26))
+                    Snackbar.make(mainView, R.string.sorry_iamnotokay, Snackbar.LENGTH_LONG)
+                            .setTextColor(getResources().getColor(R.color.white))
+                            .setBackgroundTint(getResources().getColor(R.color.dark_red))
                             .show();
                 }
             }
@@ -183,10 +180,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeEditTextToDefaultColor(int min, int sec) {
-        edtMin.setText(min == 0 ? "00" : min < 10 ? "0" + min : String.valueOf(min));
-        edtMin.setTextColor(Color.rgb(235, 151, 16));
-        edtSec.setText(sec == 0 ? "00" : sec < 10 ? "0" + sec : String.valueOf(sec));
-        edtSec.setTextColor(Color.rgb(107, 16, 235));
+        edtMin.setText(String.format("%02d", min));
+        edtMin.setTextColor(getResources().getColor(R.color.normal_orange));
+        edtSec.setText(String.format("%02d", sec));
+        edtSec.setTextColor(getResources().getColor(R.color.normal_purple));
     }
 
     private void updateColor(long time, long parcialTime) {

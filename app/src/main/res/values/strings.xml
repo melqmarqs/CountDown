@@ -2,4 +2,5 @@
     <string name="app_name">Timer</string>
 
     <string name="check_numbers">Houve algum problema. Verifique os números inseridos.</string>
+    <string name="sorry_iamnotokay">Desculpe, não estou me sentindo bem :(</string>
 </resources>
